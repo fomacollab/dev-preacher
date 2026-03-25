@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Freight Email Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+body {
+  background: #0f0f0f;
+  font-family: 'DM Sans', sans-serif;
+  color: #f0ece4;
+}
+
+.email-wrapper {
+  max-width: 620px;
+  margin: 40px auto;
+  background: #141414;
+  border: 1px solid #252525;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ── TOP ALERT BANNER ── */
+.alert-banner {
+  background: #0f0f0f;
+  border-bottom: 3px solid #b85c00;
+  padding: 48px 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.alert-banner::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(184,92,0,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.alert-tag {
+  display: inline-block;
+  background: #b85c00;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  padding: 5px 14px;
+  margin-bottom: 22px;
+}
+
+.alert-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  line-height: 0.95;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.alert-headline span {
+  color: #e07820;
+}
+
+.alert-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* ── GAS / SAVINGS SECTION ── */
+.stats-section {
+  padding: 44px 48px;
+  border-bottom: 1px solid #1e1e1e;
+  background: #111;
+}
+
+.stat-row {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.stat-box {
+  flex: 1;
+  padding: 24px 20px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.stat-box.danger {
+  background: #1a0e00;
+  border: 1px solid #b85c00;
+}
+
+.stat-box.safe {
+  background: #001a08;
+  border: 1px solid #00aa44;
+}
+
+.stat-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.stat-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-box.danger .stat-number { color: #e07820; }
+.stat-box.safe .stat-number { color: #00cc55; }
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.stat-box.danger .stat-label { color: rgba(224,120,32,0.8); }
+.stat-box.safe .stat-label { color: rgba(0,200,85,0.8); }
+
+.vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.2);
+}
+
+.savings-note {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(240,236,228,0.45);
+  line-height: 1.6;
+  padding: 0 8px;
+}
+
+.savings-note strong {
+  color: #00cc55;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  padding: 44px 48px;
+  text-align: center;
+  background: linear-gradient(180deg, #111 0%, #0d0a00 100%);
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.cta-pre {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: rgba(240,200,80,0.5);
+  margin-bottom: 10px;
+}
+
+.cta-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: #f0ece4;
+  margin-bottom: 26px;
+  letter-spacing: 1px;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: #e0b020;
+  color: #0a0800;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 16px 42px;
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.cta-btn:hover {
+  background: #f0c830;
+  transform: translateY(-1px);
+}
+
+.cta-trust {
+  margin-top: 16px;
+  font-size: 12px;
+  color: rgba(240,236,228,0.4);
+  font-style: italic;
+}
+
+/* ── USP SECTION ── */
+.usps {
+  padding: 40px 48px;
+  border-bottom: 1px solid #1e1e1e;
+  background: #141414;
+}
+
+.usps-title {
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: rgba(224,176,32,0.55);
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.usp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.usp-item {
+  background: #1a1a1a;
+  border: 1px solid #252525;
+  border-left: 3px solid #e0b020;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.usp-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.usp-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e0d8c8;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: #0a0a0a;
+  padding: 22px 48px;
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+}
+
+.footer p {
+  font-size: 11px;
+  color: rgba(240,236,228,0.22);
+  line-height: 1.8;
+}
+
+.footer a {
+  color: rgba(224,176,32,0.45);
+  text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .alert-banner, .stats-section, .cta-section, .usps, .footer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .alert-headline { font-size: 50px; }
+  .stat-row { flex-direction: column; }
+  .vs-divider { width: 100%; height: 20px; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div class="email-wrapper">
+
+  <!-- ALERT HERO -->
+
+  <div class="alert-banner">
+    <div class="alert-tag">Market Update</div>
+    <div class="alert-headline">
+      Freight Market<br>is Highly <span>Unstable</span>
+    </div>
+    <p class="alert-sub">Here is how businesses are managing their shipping costs through the volatility.</p>
+  </div>
+
+  <!-- CTA — above the fold -->
+
+  <div class="cta-section">
+    <p class="cta-pre">Let's connect</p>
+    <h3 class="cta-headline">Schedule a conversation with our team</h3>
+    <a href="https://your-booking-link.com" class="cta-btn">Book an Appointment</a>
+    <p class="cta-trust">Work with a licensed broker — your shipments are in reliable hands.</p>
+  </div>
+
+  <!-- GAS + SAVINGS STATS -->
+
+  <div class="stats-section">
+    <div class="stat-row">
+      <div class="stat-box danger">
+        <div class="stat-icon">⛽</div>
+        <div class="stat-number">30%</div>
+        <div class="stat-label">Rise in fuel<br>costs this year</div>
+      </div>
+      <div class="vs-divider">VS</div>
+      <div class="stat-box safe">
+        <div class="stat-icon">📉</div>
+        <div class="stat-number">20%</div>
+        <div class="stat-label">Reduction in<br>your shipping costs</div>
+      </div>
+    </div>
+    <p class="savings-note">
+      Even with rising fuel costs, our clients have been able to <strong>reduce shipping expenses by up to 20%</strong> — with no compromise on reliability or transit times.
+    </p>
+  </div>
+
+  <!-- USPS -->
+
+  <div class="usps">
+    <p class="usps-title">What we offer</p>
+    <div class="usp-list">
+      <div class="usp-item">
+        <span class="usp-icon">🌐</span>
+        <span class="usp-text">Nationwide Carrier Connectivity</span>
+      </div>
+      <div class="usp-item">
+        <span class="usp-icon">🔄</span>
+        <span class="usp-text">End-to-End Logistics Solutions</span>
+      </div>
+      <div class="usp-item">
+        <span class="usp-icon">🚛</span>
+        <span class="usp-text">Cross-Border Shipments</span>
+      </div>
+      <div class="usp-item">
+        <span class="usp-icon">📦</span>
+        <span class="usp-text">LTL and FTL Freight Options</span>
+      </div>
+      <div class="usp-item">
+        <span class="usp-icon">🛡️</span>
+        <span class="usp-text">Verified and Vetted Carrier Network</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+    <p>
+      © 2026 Your Brand Ltd. · All rights reserved.<br>
+      <a href="#">Unsubscribe</a> · <a href="#">Privacy Policy</a> · <a href="#">Terms</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
