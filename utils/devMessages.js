@@ -1,4 +1,4 @@
-export const devMessages: Record<number, string> = {
+export const devMessages = {
 
   // --- GENERAL FULL STACK ---
 
