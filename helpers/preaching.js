@@ -792,9 +792,15 @@ const processAccount = async (account, sourceAccount) => {
     // Step 4: Get all other preachers to avoid duplicates
     const allPreachers = await Account.find({ role: 'preacher', _id: { $ne: account._id } });
     const otherPreacherGroupIds = new Set();
+    const otherPreacherGroups = new Map();
     for (const preacher of allPreachers) {
+      const preacherLabel = preacher.username ? `@${preacher.username}` : preacher.number;
       for (const group of preacher.groups) {
         otherPreacherGroupIds.add(group.id);
+        if (!otherPreacherGroups.has(group.id)) {
+          otherPreacherGroups.set(group.id, []);
+        }
+        otherPreacherGroups.get(group.id).push(preacherLabel);
       }
     }
     
