@@ -874,20 +874,31 @@ const processAccount = async (account, sourceAccount) => {
         // 2. Check if we are an admin/owner of this group!
         const me = await client.getMe();
         let isAdminOrOwner = false;
-        
-        try {
-          if (entity.className === 'Chat') {
-            // For basic chat, check if we are creator
-            isAdminOrOwner = entity.creator === true || entity.adminRights !== undefined;
-          } else if (entity.className === 'Channel' && entity.megagroup) {
-            // For supergroups/channels, get participant
-            const participant = await client.getParticipant(entity, me.id);
-            isAdminOrOwner = participant && (participant.participant.className === 'ChannelParticipantCreator' || participant.participant.className === 'ChannelParticipantAdmin');
+
+        if (entity.className === 'Chat') {
+          isAdminOrOwner = entity.creator === true || entity.adminRights !== undefined;
+        } else if (entity.className === 'Channel' && entity.megagroup) {
+          if (entity.creator === true || entity.adminRights !== undefined) {
+            isAdminOrOwner = true;
+          } else {
+            try {
+              const participant = await client.getParticipant(entity, me.id);
+              isAdminOrOwner = participant && (
+                participant.participant.className === 'ChannelParticipantCreator' ||
+                participant.participant.className === 'ChannelParticipantAdmin'
+              );
+            } catch (err) {
+              const errMsg = (err?.message || '').toUpperCase();
+              if (errMsg.includes('USER_NOT_PARTICIPANT') || errMsg.includes('CHANNEL_INVALID') ||
+                  errMsg.includes('CHAT_INVALID') || errMsg.includes('NOT_MUTUAL_CONTACT')) {
+                isAdminOrOwner = false;
+              } else if (errMsg.includes('TIMEOUT') || errMsg.includes('FLOOD')) {
+                isAdminOrOwner = false;
+              } else {
+                throw err;
+              }
+            }
           }
-        } catch (err) {
-          // If we can't check admin status, skip just to be safe!
-          console.log(`  ⚠️ [${accountUsername}] Could not check admin status in ${group.name}, skipping`);
-          continue;
         }
         
         if (isAdminOrOwner) {

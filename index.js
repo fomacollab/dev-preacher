@@ -26,6 +26,21 @@ import launchBot from "./helpers/launchbot.js";
 import express from "express";
 dotenv.config();
 
+process.on('unhandledRejection', (reason) => {
+  const msg = (reason?.message || String(reason)).toLowerCase();
+  if (msg.includes('timeout')) {
+    return;
+  }
+});
+
+process.on('uncaughtException', (err) => {
+  const msg = (err?.message || String(err)).toLowerCase();
+  if (msg.includes('timeout')) {
+    return;
+  }
+  console.error('[uncaughtException]', err?.stack || err);
+});
+
 const app = express();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 global.bot = bot;
