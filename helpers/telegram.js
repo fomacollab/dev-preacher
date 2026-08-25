@@ -11,9 +11,26 @@ export function createClient(sessionString = '') {
   const apiHash = process.env.API_HASH;
   const stringSession = new StringSession(sessionString);
   
-  return new TelegramClient(stringSession, apiId, apiHash, {
+  const client = new TelegramClient(stringSession, apiId, apiHash, {
     connectionRetries: 5,
+    timeout: 20000,
+    requestRetries: 3,
+    retryDelay: 1500,
+    autoReconnect: true,
   });
+
+  client.addEventHandler((update) => {
+    // no-op: prevents unhandled update warnings
+  });
+
+  client.on('error', (err) => {
+    const msg = (err?.message || String(err)).toLowerCase();
+    if (msg.includes('timeout')) {
+      return;
+    }
+  });
+
+  return client;
 }
 
 /**
